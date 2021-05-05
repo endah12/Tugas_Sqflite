@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(Myapp());
+
+class Myapp extends StatefulWidget {
+  _MyappState createState() => _MyappState();
+}
+
+class _MyappState extends State<Myapp> {
+  //deklarasi variabel
+  final kodemobil = TextEditingController();
+  final merkmobil = TextEditingController();
+  final namamobil = TextEditingController();
+  final jenismobil = TextEditingController();
+  List<Widget> data = [];
+
+  onTambah() {
+    setState(() {
+      data.add(ListTile(
+        leading: Text(kodemobil.text),
+        title: Text(merkmobil.text),
+        subtitle: Text(namamobil.text),
+        trailing: Text(jenismobil.text),
+         
+      ));
+    });
+  }
+
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: new Scaffold(
+            appBar: new AppBar(title: Text("TOKO MOBIL EXPO")),
+            body: new ListView(
+              children: <Widget>[
+                new Container(
+                  padding: EdgeInsets.all(10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      TextField(
+                        controller: kodemobil,
+                        decoration: InputDecoration(hintText: 'Kode Mobil'),
+                      ),
+                      TextField(
+                        controller: merkmobil,
+                        decoration: InputDecoration(hintText: 'Merk Mobil'),
+                      ),
+                      TextField(
+                        controller: namamobil,
+                        decoration: InputDecoration(hintText: 'Nama Mobil'),
+                      ),
+                      TextField(
+                        controller: jenismobil,
+                        decoration: InputDecoration(hintText: 'Jenis Mobil'),
+                      ),
+                      ElevatedButton(child: Text("Tambah"), onPressed: onTambah),
+                    ],
+                  ),
+                ),
+                new Column(
+                  // Isi List View
+                  children: data,
+                )
+              ],
+            )));
+  }
+}
